@@ -1,0 +1,12 @@
+class Solution:
+    def twoEditWords(self, queries: list[str], dictionary: list[str]) -> list[str]:
+        res = []
+        for q in queries:
+            for d in dictionary:
+                # Calculate differences between strings of the same length
+                diffs = sum(1 for i in range(len(q)) if q[i] != d[i])
+                
+                if diffs <= 2:
+                    res.append(q)
+                    break # Stop checking once a match within 2 edits is found
+        return res
