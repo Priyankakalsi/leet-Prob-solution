@@ -1,0 +1,11 @@
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        # If numRows is 1 or more than the string length, no zigzagging happens
+        if numRows == 1 or numRows >= len(s):
+            return s
+        
+        # Create a list for each row to store characters
+        rows = [''] * numRows
+        curr_row = 0
+        going_down = False
+…        return "".join(rows)
