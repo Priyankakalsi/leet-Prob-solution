@@ -1,0 +1,15 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        if not s:
+            return ""
+        res = ""
+        for i in range(len(s)):
+            # Odd length (center is a character: "aba")
+            p1 = self.expand(s, i, i)
+     def expand(self, s: str, l: int, r: int) -> str:
+        # Expand outwards as long as it's a palindrome
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            l -= 1
+            r += 1
+        # Return the valid palindrome (slice is [l+1 : r])
+        return s[l+1:r]
