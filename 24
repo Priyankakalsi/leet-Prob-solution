@@ -1,0 +1,20 @@
+class Solution:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # Dummy node to act as the starting point
+        dummy = ListNode(0, head)
+        prev = dummy
+        
+        while prev.next and prev.next.next:
+            # Identify the two nodes to swap
+            first = prev.next
+            second = prev.next.next
+            
+            # Swapping logic
+            first.next = second.next
+            second.next = first
+            prev.next = second
+            
+            # Move 'prev' pointer two steps forward for the next pair
+            prev = first
+            
+        return dummy.next
