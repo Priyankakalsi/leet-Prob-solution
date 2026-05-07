@@ -1,0 +1,12 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        
+        # Constants for 32-bit integer limits
+        MAX_INT = 2**31 - 1
+        MIN_INT = -2**31
+        
+        # Handle overflow case: -2^31 / -1 = 2^31 (exceeds 32-bit limit)
+        if dividend == MIN_INT and divisor == -1:
+            return MAX_I
+            
+        return -quotient if negative else quotient
