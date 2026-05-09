@@ -1,0 +1,20 @@
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        # Use a dummy node to handle edge cases (like removing the first node)
+        dummy = ListNode(0, head)
+        fast = dummy
+        slow = dummy
+        
+        # 1. Give the fast pointer an 'n' step head start
+        for _ in range(n):
+            fast = fast.next
+            
+        # 2. Move both until fast reaches the last node
+        while fast.next:
+            fast = fast.next
+            slow = slow.next
+            
+        # 3. Slow is now at (N+1)th node from the end. Skip the Nth node.
+        slow.next = slow.next.next
+        
+        return dummy.next
