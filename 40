@@ -1,0 +1,32 @@
+class Solution:
+
+    def combinationSum2(
+        self, candidates: list[int], target: int
+    ) -> list[list[int]]:
+        res = []
+        # Sort to group duplicates together and handle pruning
+        candidates.sort()
+
+        def backtrack(start_idx: int, cur_comb: list[int], remain: int):
+            # Base Case 1: Target reached
+            if remain == 0:
+                res.append(cur_comb.copy())
+                return
+
+            # Loop through candidates starting from current index
+            for i in range(start_idx, len(candidates)):
+                # Skip duplicate elements at the same recursion level
+                if i > start_idx and candidates[i] == candidates[i - 1]:
+                    continue
+
+                # Optimization: If the number exceeds remaining target, stop the loop
+                if candidates[i] > remain:
+                    break
+
+                # Include the element and move forward
+                cur_comb.append(candidates[i])
+                backtrack(i + 1, cur_comb, remain - candidates[i])
+                cur_comb.pop()  # Backtrack
+
+        backtrack(0, [], target)
+        return res
