@@ -1,0 +1,32 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        if num1 == "0" or num2 == "0":
+            return "0"
+        
+        # FIXED: Removed the duplicate len() call
+        m, n = len(num1), len(num2)
+        result = [0] * (m + n)
+        
+        # Multiply from right to left
+        for i in range(m - 1, -1, -1):
+            for j in range(n - 1, -1, -1):
+                # Calculate product of individual digits
+                mul = (ord(num1[i]) - ord('0')) * (ord(num2[j]) - ord('0'))
+                
+                # Positions in result array
+                p1, p2 = i + j, i + j + 1
+                
+                # Add to current sum at position p2
+                total = mul + result[p2]
+                
+                # Update positions
+                result[p2] = total % 10
+                result[p1] += total // 10
+                
+        # Convert result array to string, skipping leading zeros
+        ans = []
+        for digit in result:
+            if not (len(ans) == 0 and digit == 0):
+                ans.append(str(digit))
+                
+        return "".join(ans) if ans else "0"
