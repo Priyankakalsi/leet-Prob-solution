@@ -1,0 +1,20 @@
+class Solution:
+    def earliestFinishTime(self, landStartTime: list[int], landDuration: list[int], waterStartTime: list[int], waterDuration: list[int]) -> int:
+        min_finish = float('inf')
+        
+        # Test every single combination of land and water rides
+        for i in range(len(landStartTime)):
+            for j in range(len(waterStartTime)):
+                
+                # Sequence 1: Land ride first -> then Water ride
+                finish_land = landStartTime[i] + landDuration[i]
+                seq1_finish = max(finish_land, waterStartTime[j]) + waterDuration[j]
+                
+                # Sequence 2: Water ride first -> then Land ride
+                finish_water = waterStartTime[j] + waterDuration[j]
+                seq2_finish = max(finish_water, landStartTime[i]) + landDuration[i]
+                
+                # Keep the absolute earliest finish time found so far
+                min_finish = min(min_finish, seq1_finish, seq2_finish)
+                
+        return min_finish
