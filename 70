@@ -1,0 +1,19 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        # Base cases
+        if n <= 2:
+            return n
+        
+        # Track ways to reach the last two steps
+        one_step_before = 2  # Ways to reach step 2
+        two_steps_before = 1 # Ways to reach step 1
+        
+        # Dynamically calculate ways for subsequent steps
+        for _ in range(3, n + 1):
+            current = one_step_before + two_steps_before
+            
+            # Shift our window forward
+            two_steps_before = one_step_before
+            one_step_before = current
+            
+        return one_step_before
