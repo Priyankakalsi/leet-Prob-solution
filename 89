@@ -1,0 +1,4 @@
+class Solution:
+    def grayCode(self, n: int) -> list[int]:
+        # There are 2^n elements in an n-bit Gray Code sequence
+        return [i ^ (i >> 1) for i in range(1 << n)]
