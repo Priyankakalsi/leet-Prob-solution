@@ -1,0 +1,24 @@
+class Solution:
+    def jump(self, nums: list[int]) -> int:
+        # If the array has only 1 element, 0 jumps are needed
+        if len(nums) <= 1:
+            return 0
+        
+        jumps = 0
+        current_end = 0
+        furthest = 0
+        
+        # Traverse the array except for the last element
+        for i in range(len(nums) - 1):
+            furthest = max(furthest, i + nums[i])
+            
+            # If we finish the current jump range
+            if i == current_end:
+                jumps += 1
+                current_end = furthest
+                
+                # Optimization: if we can already reach the end, break early
+                if current_end >= len(nums) - 1:
+                    break
+                    
+        return jumps
